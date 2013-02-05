@@ -89,4 +89,32 @@ class List{
 	public void linkb(List l){
 		getHead().append(l.getHead());
 	}
+
+	public Boolean inList(Object o){
+		ListNode next = head;
+		while(next != null){
+			if(next.getDatum() == o) return true;
+			next = next.next();
+		}
+		return false;
+	}
+
+	public void delete(Object o){
+		if(head.getDatum() == o) head = head.next();
+		if(length() > 0){
+			ListNode next = head;
+			while(next.next() != null){
+				if(next.next().getDatum() == o){
+					try{
+						next.setReference(next.next().next());
+					}
+					catch (Exception e){
+						next.setReference(null);
+					}
+				}
+				next = next.next();
+			}
+		}
+	}
+
 }

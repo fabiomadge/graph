@@ -6,39 +6,35 @@ class Graph{
 	}
 
 	public boolean adjacent(Node x, Node y){
-		//ToDo
-		return false;
+		return x.adjacent(y);
 	}
 
 	public List neighbors(Node x){
-		//ToDo
-		return new List();
+		return x.neighbors();
 	}
 
 	public void add(Node x, Node y){
-		//ToDo
+		x.add(new Edge(y));
 	}
 
 	public void delete(Node x, Node y){
-		//ToDo
+		x.delete(y);
 	}
 
-	public String getNodeValue(Node x){
-		//ToDo
-		return "ToDo";
+	public double getNodeValue(Node x){
+		return x.getValue();
 	}
 
-	public void setNodeValue(Node x, String s){
-		//ToDo
+	public void setNodeValue(Node x, double value){
+		x.setValue(value);
 	}
 
 	public double getEdgeValue(Node x, Node y){
-		//ToDo
-		return 0.0;
+		return x.getEdge(y).getValue();
 	}
 
 	public void setEdgeValue(Node x, Node y, double value){
-		//ToDo
+		x.getEdge(y).setValue(value);
 	}
 
 	public List depthFirst(Node x, Node y){
@@ -49,5 +45,29 @@ class Graph{
 	public List breadthFirst(Node x, Node y){
 		//ToDo
 		return new List();
+	}
+
+	public void addNode(Node x){
+		nodes.add(x);
+	}
+
+	public void deleteNode(Node x){
+		ListNode next = nodes.getHead();
+		while(next != null){
+			delete(((Node)next.getDatum()), x);
+			next = next.next();
+		}
+		nodes.delete(x);
+	}
+
+	public String toString(){
+		String s = "";
+		ListNode next = nodes.getHead();
+		while(next != null){
+			if(next.next() == null) s = s + next.toString();
+			else                  s = s + (next.toString() + "\n");
+			next = next.next();
+		}
+		return s;
 	}
 }

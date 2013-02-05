@@ -27,4 +27,8 @@ class Edge{
 	public void setValue(double value){
 		v = value;
 	}
+
+	public String toString(){
+		return "-(" + String.valueOf(v) + ")> " + d.getName();
+	}
 }
