@@ -113,6 +113,7 @@ class List{
 					}
 				}
 				next = next.next();
+				if(next == null) break;
 			}
 		}
 	}

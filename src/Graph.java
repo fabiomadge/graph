@@ -43,8 +43,28 @@ class Graph{
 	}
 
 	public List breadthFirst(Node x, Node y){
-		//ToDo
-		return new List();
+		List paths = new List();
+		paths.add(new List());
+		((List)(paths.head())).add(x);
+		while(!((Node)(((List)paths.head()).head()) == x && ((Node)(((List)paths.head()).last())) == y)){
+			List path = (List)(paths.head());
+			paths = paths.tail();
+			ListNode next = neighbors((Node) path.last()).getHead();
+			while(next != null){
+				if(!(path.inList(next))){
+					List newPath = new List();
+					ListNode n = path.getHead();
+					while(n != null){
+						newPath.append(n.getDatum());
+						n = n.next();
+					}
+					newPath.append(next.getDatum());
+					paths.append(newPath);
+				}
+				next = next.next();
+			}
+		}
+		return ((List)paths.head());
 	}
 
 	public void addNode(Node x){
