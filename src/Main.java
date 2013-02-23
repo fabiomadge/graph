@@ -54,6 +54,7 @@ public class Main
 		g.deleteNode(d);
 		System.out.println(g);
 		System.out.println("A -> F");
+		System.out.println(g.depthFirst(a, f));
 		System.out.println(g.breadthFirst(a, f));
 	}
 }

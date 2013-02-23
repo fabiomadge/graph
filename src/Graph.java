@@ -38,8 +38,30 @@ class Graph{
 	}
 
 	public List depthFirst(Node x, Node y){
-		//ToDo
-		return new List();
+		List paths = new List();
+		paths.add(new List());
+		((List)(paths.head())).add(x);
+		while(!((Node)(((List)paths.head()).head()) == x && ((Node)(((List)paths.head()).last())) == y)){
+			List path = (List)(paths.head());
+			paths = paths.tail();
+			List cpaths = new List();
+			ListNode next = neighbors((Node) path.last()).getHead();
+			while(next != null){
+				if(!(path.inList(next.getDatum()))){
+					List newPath = new List();
+					ListNode n = path.getHead();
+					while(n != null){
+						newPath.append(n.getDatum());
+						n = n.next();
+					}
+					newPath.append(next.getDatum());
+					cpaths.append(newPath);
+				}
+				next = next.next();
+			}
+			paths.linkf(cpaths);
+		}
+		return ((List)paths.head());
 	}
 
 	public List breadthFirst(Node x, Node y){
@@ -51,7 +73,7 @@ class Graph{
 			paths = paths.tail();
 			ListNode next = neighbors((Node) path.last()).getHead();
 			while(next != null){
-				if(!(path.inList(next))){
+				if(!(path.inList(next.getDatum()))){
 					List newPath = new List();
 					ListNode n = path.getHead();
 					while(n != null){
